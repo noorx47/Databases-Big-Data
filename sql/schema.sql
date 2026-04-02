@@ -2,11 +2,10 @@
 -- Social Media Database Project
 -- Student: Harnoor Singh
 
--- Create the database
 CREATE DATABASE IF NOT EXISTS social_media_db;
 USE social_media_db;
 
--- Users table: stores account info for each user
+-- users table
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) NOT NULL UNIQUE,
@@ -15,7 +14,7 @@ CREATE TABLE users (
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
--- Posts table: each post belongs to a user
+-- posts made by users
 CREATE TABLE posts (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
@@ -25,7 +24,6 @@ CREATE TABLE posts (
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
--- Comments table: users can comment on posts
 CREATE TABLE comments (
     id INT AUTO_INCREMENT PRIMARY KEY,
     post_id INT NOT NULL,
@@ -36,8 +34,7 @@ CREATE TABLE comments (
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
--- Likes table: tracks which user liked which post
--- unique_like prevents a user liking the same post twice
+-- likes table, unique_like makes sure a user cant like the same post twice
 CREATE TABLE likes (
     id INT AUTO_INCREMENT PRIMARY KEY,
     post_id INT NOT NULL,
@@ -48,8 +45,7 @@ CREATE TABLE likes (
     UNIQUE KEY unique_like (post_id, user_id)
 );
 
--- Follows table: tracks who follows who
--- composite primary key stops duplicate follow relationships
+-- follows table, composite primary key so you cant follow someone twice
 CREATE TABLE follows (
     follower_id INT NOT NULL,
     following_id INT NOT NULL,
@@ -59,7 +55,6 @@ CREATE TABLE follows (
     FOREIGN KEY (following_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
--- Messages table: direct messages between users
 CREATE TABLE messages (
     id INT AUTO_INCREMENT PRIMARY KEY,
     sender_id INT NOT NULL,
