@@ -1,6 +1,3 @@
--- B103 Databases & Big Data
--- Social Media Database Project
--- Student: Harnoor Singh
 
 CREATE DATABASE IF NOT EXISTS social_media_db;
 USE social_media_db;
@@ -14,14 +11,13 @@ CREATE TABLE users (
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
--- posts made by users
 CREATE TABLE posts (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT NOT NULL,
-    content TEXT NOT NULL,
-    image_url VARCHAR(255),
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT NOT NULL,
+  content TEXT NOT NULL,
+  image_url VARCHAR(255),
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
 CREATE TABLE comments (
@@ -34,7 +30,7 @@ CREATE TABLE comments (
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
--- likes table, unique_like makes sure a user cant like the same post twice
+-- unique_like stops the same user liking a post more than once
 CREATE TABLE likes (
     id INT AUTO_INCREMENT PRIMARY KEY,
     post_id INT NOT NULL,
@@ -45,7 +41,6 @@ CREATE TABLE likes (
     UNIQUE KEY unique_like (post_id, user_id)
 );
 
--- follows table, composite primary key so you cant follow someone twice
 CREATE TABLE follows (
     follower_id INT NOT NULL,
     following_id INT NOT NULL,
@@ -55,6 +50,7 @@ CREATE TABLE follows (
     FOREIGN KEY (following_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
+-- messages between two users
 CREATE TABLE messages (
     id INT AUTO_INCREMENT PRIMARY KEY,
     sender_id INT NOT NULL,
