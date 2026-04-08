@@ -2,10 +2,10 @@ USE social_media_db;
 
 -- users
 INSERT INTO users (username, email, bio) VALUES
-('alex_smith', 'alex@email.com', 'Just a guy who loves coffee and coding.'),
+('alex_smith', 'alex@email.com', 'Just a guy who loves coffee and playing.'),
 ('maya_jones', 'maya@email.com', 'Photographer based in Berlin.'),
-('carlos_r', 'carlos@email.com', 'Fitness enthusiast and personal trainer.'),
-('sara_k', 'sara@email.com', 'Student at HU Berlin. Into music and travel.'),
+('carlos_r', 'carlos@email.com', 'Fitness and personal trainer.'),
+('sara_k', 'sara@email.com', 'Student at Gisma Berlin. Into music and travel.'),
 ('tom_w', 'tom@email.com', 'Software developer. Building things on weekends.');
 
 INSERT INTO users (username, email, bio) VALUES

@@ -60,3 +60,19 @@ CREATE TABLE messages (
     FOREIGN KEY (sender_id) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (receiver_id) REFERENCES users(id) ON DELETE CASCADE
 );
+
+-- indexes to make searches faster
+
+-- when we look up posts by a user
+CREATE INDEX idx_posts_user ON posts(user_id);
+-- comments are usually searched by post
+CREATE INDEX idx_comments_post ON comments(post_id);
+
+-- also need to find comments made by a user
+CREATE INDEX idx_comments_user ON comments(user_id);
+
+-- to count likes on a post quickly
+CREATE INDEX idx_likes_post ON likes(post_id);
+
+-- to get messages sent to a specific user
+CREATE INDEX idx_messages_receiver ON messages(receiver_id);
